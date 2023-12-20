@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://djfhj188jbker"]
+
+[ext_resource type="Texture2D" uid="uid://dduemxk7qafy0" path="res://Assets/Oryx/oryx_16bit_fantasy_world_943.png" id="1_c50dg"]
+[ext_resource type="PackedScene" uid="uid://c1prhfeef2g7d" path="res://Scenes/Characters/player.tscn" id="2_7trne"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Backgeround" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(198, 173)
+texture = ExtResource("1_c50dg")
+region_enabled = true
+region_rect = Rect2(-144, 0, 1000, 10000)
+
+[node name="Player" parent="." instance=ExtResource("2_7trne")]
+position = Vector2(226, 170)
