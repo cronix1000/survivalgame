@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://beveyil2lo3jh"]
+[gd_scene load_steps=8 format=3 uid="uid://bhb6hypgf0j2n"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_fft8g"]
 [ext_resource type="Texture2D" uid="uid://by1607qhc8pj6" path="res://Assets/Oryx/oryx_16bit_fantasy_creatures_trans.png" id="2_0g4t4"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="3_rki75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kq6nf"]
 atlas = ExtResource("2_0g4t4")
@@ -57,3 +58,8 @@ vframes = 2
 libraries = {
 "": SubResource("AnimationLibrary_jfmot")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("3_rki75")

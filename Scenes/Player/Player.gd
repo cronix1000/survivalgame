@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var movement_speed : int = 30.0
 @onready var player : AnimationPlayer = $AnimationPlayer
 @onready var character_sprite : Sprite2D = $CharacterSprite
-@onready var move = load("res://Scenes/Abilities/move.tscn")
+@onready var move = load_ability("move")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player.play("Idle")
@@ -21,3 +21,9 @@ func movement():
 		character_sprite.flip_h = true
 	if(x_move == -1):
 		character_sprite.flip_h = false
+
+func load_ability(ability_name : String):
+	var scene = load("res://Scenes/Abilities/" + ability_name + ".tscn")
+	var scene_node = scene.instantiate()
+	add_child(scene_node)
+	return scene_node;
