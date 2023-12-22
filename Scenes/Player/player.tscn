@@ -46,7 +46,7 @@ _data = {
 "RESET": SubResource("Animation_rmmr1")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_fft8g")
 

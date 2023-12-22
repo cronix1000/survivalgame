@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://deh0knpjefq3p"]
 
 [ext_resource type="Texture2D" uid="uid://dduemxk7qafy0" path="res://Assets/Oryx/oryx_16bit_fantasy_world_943.png" id="1_iam1v"]
-[ext_resource type="PackedScene" uid="uid://beveyil2lo3jh" path="res://Scenes/Player/player.tscn" id="2_r4bok"]
+[ext_resource type="PackedScene" uid="uid://bhb6hypgf0j2n" path="res://Scenes/Player/player.tscn" id="2_r4bok"]
 
 [node name="main" type="Node2D"]
 

@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://p0hd0g1d7fsg"]
+
+[ext_resource type="PackedScene" uid="uid://bkmvy0c7hy01u" path="res://Scenes/SkillTree/skill_tree_node.tscn" id="1_vh6j0"]
+[ext_resource type="PackedScene" uid="uid://bhb6hypgf0j2n" path="res://Scenes/Player/player.tscn" id="2_jsr4p"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_jsr4p")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="SkillTreeNode" parent="CanvasLayer" instance=ExtResource("1_vh6j0")]
+offset_left = 161.0
+offset_top = -99.0
+offset_right = 201.0
+offset_bottom = -59.0
+unlockable = true
+learned = false
+health = 0
+stamina = 0
+strength = 0
+
+[node name="SkillTreeNode2" parent="CanvasLayer" instance=ExtResource("1_vh6j0")]
+offset_left = 53.0
+offset_top = -49.0
+offset_right = 93.0
+offset_bottom = -9.0
+unlockable = false
+learned = false
+health = 0
+stamina = 0
+strength = 0
+
+[node name="SkillTreeNode3" parent="CanvasLayer" instance=ExtResource("1_vh6j0")]
+offset_left = 134.0
+offset_top = -173.0
+offset_right = 174.0
+offset_bottom = -133.0
+unlockable = false
+learned = false
+health = 0
+stamina = 0
+strength = 0

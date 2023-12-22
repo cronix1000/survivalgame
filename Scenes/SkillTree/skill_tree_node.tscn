@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkmvy0c7hy01u"]
+
+[ext_resource type="Texture2D" uid="uid://dykpsppoma2e2" path="res://Assets/skilltree.png" id="1_luimv"]
+[ext_resource type="Script" path="res://Scenes/SkillTree/skill_tree_node.gd" id="1_quqiv"]
+[ext_resource type="PackedScene" uid="uid://doqrvup5s6fn4" path="res://Scenes/SkillTree/skill_tree_line.tscn" id="4_2pk88"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqnee"]
+atlas = ExtResource("1_luimv")
+region = Rect2(0, 0, 8, 8)
+
+[node name="SkillTreeNode" type="TextureButton"]
+texture_filter = 1
+layout_direction = 2
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = SubResource("AtlasTexture_pqnee")
+stretch_mode = 1
+script = ExtResource("1_quqiv")
+tree_node_line = ExtResource("4_2pk88")
+
+[connection signal="on_learned" from="." to="." method="_on_on_learned"]
+[connection signal="on_unlocked" from="." to="." method="_on_on_unlocked"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
