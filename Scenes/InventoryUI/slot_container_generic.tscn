@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d16nomqgr05n5"]
+
+[ext_resource type="Script" path="res://Scenes/InventoryUI/slot_container_generic.gd" id="1_0ilno"]
+
+[node name="slot_container_generic" type="GridContainer"]
+script = ExtResource("1_0ilno")

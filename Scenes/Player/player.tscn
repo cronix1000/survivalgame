@@ -1,8 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhb6hypgf0j2n"]
+[gd_scene load_steps=15 format=3 uid="uid://bhb6hypgf0j2n"]
 
 [ext_resource type="Script" path="res://Scenes/Player/Player.gd" id="1_fft8g"]
 [ext_resource type="Texture2D" uid="uid://by1607qhc8pj6" path="res://Assets/Oryx/oryx_16bit_fantasy_creatures_trans.png" id="2_0g4t4"]
-[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="3_rki75"]
+[ext_resource type="PackedScene" uid="uid://cgur5lf6ggd0q" path="res://Scenes/InventoryUI/inventory.tscn" id="3_76dy1"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="4_6h0w4"]
+[ext_resource type="PackedScene" uid="uid://yjni4dqxjmrs" path="res://Scenes/InventoryUI/gear_slot.tscn" id="4_q0orn"]
+[ext_resource type="Texture2D" uid="uid://cy8ybxm8d3axi" path="res://Assets/UI_Elements/helmet_default_icon.png" id="5_lecwp"]
+[ext_resource type="Texture2D" uid="uid://cdc6nh7n7yvcr" path="res://Assets/UI_Elements/body_default_icon.png" id="6_r7ae3"]
+[ext_resource type="Texture2D" uid="uid://cwt3kbb7poexp" path="res://Assets/UI_Elements/boots_default_icon.png" id="7_0skuo"]
+[ext_resource type="Texture2D" uid="uid://kpsyd8rjkblh" path="res://Assets/UI_Elements/main_hand_default_icon.png" id="8_yp6ml"]
+[ext_resource type="Texture2D" uid="uid://dswlc2biwo5kt" path="res://Assets/UI_Elements/off_hand_default_icon.png" id="9_tfjya"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kq6nf"]
 atlas = ExtResource("2_0g4t4")
@@ -61,5 +68,73 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Inventory" type="Node2D" parent="."]
-script = ExtResource("3_rki75")
+[node name="inventory_holder" parent="." instance=ExtResource("3_76dy1")]
+
+[node name="slot_container_generic" parent="inventory_holder/CanvasLayer" index="2" node_paths=PackedStringArray("Inventory")]
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+offset_left = 527.0
+offset_top = 262.0
+offset_right = -17.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+Inventory = NodePath("../../inventory")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="inventory_holder/CanvasLayer" index="3"]
+offset_left = 517.0
+offset_top = 199.0
+offset_right = 632.0
+offset_bottom = 239.0
+
+[node name="gear_slot" parent="inventory_holder/CanvasLayer/HBoxContainer" instance=ExtResource("4_q0orn")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+gear_slot = "helmet"
+
+[node name="item_icon" parent="inventory_holder/CanvasLayer/HBoxContainer/gear_slot" index="0"]
+texture = ExtResource("5_lecwp")
+expand_mode = 1
+
+[node name="gear_slot2" parent="inventory_holder/CanvasLayer/HBoxContainer" instance=ExtResource("4_q0orn")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+gear_slot = "body"
+
+[node name="item_icon" parent="inventory_holder/CanvasLayer/HBoxContainer/gear_slot2" index="0"]
+texture = ExtResource("6_r7ae3")
+
+[node name="gear_slot3" parent="inventory_holder/CanvasLayer/HBoxContainer" instance=ExtResource("4_q0orn")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+gear_slot = "boots"
+
+[node name="item_icon" parent="inventory_holder/CanvasLayer/HBoxContainer/gear_slot3" index="0"]
+texture = ExtResource("7_0skuo")
+
+[node name="gear_slot4" parent="inventory_holder/CanvasLayer/HBoxContainer" instance=ExtResource("4_q0orn")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+gear_slot = "main_hand"
+
+[node name="item_icon" parent="inventory_holder/CanvasLayer/HBoxContainer/gear_slot4" index="0"]
+texture = ExtResource("8_yp6ml")
+
+[node name="gear_slot5" parent="inventory_holder/CanvasLayer/HBoxContainer" instance=ExtResource("4_q0orn")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+gear_slot = "off_hand"
+
+[node name="item_icon" parent="inventory_holder/CanvasLayer/HBoxContainer/gear_slot5" index="0"]
+texture = ExtResource("9_tfjya")
+
+[node name="inventory" type="Node" parent="inventory_holder"]
+script = ExtResource("4_6h0w4")
+
+[editable path="inventory_holder"]
+[editable path="inventory_holder/CanvasLayer/HBoxContainer/gear_slot"]
+[editable path="inventory_holder/CanvasLayer/HBoxContainer/gear_slot2"]
+[editable path="inventory_holder/CanvasLayer/HBoxContainer/gear_slot3"]
+[editable path="inventory_holder/CanvasLayer/HBoxContainer/gear_slot4"]
+[editable path="inventory_holder/CanvasLayer/HBoxContainer/gear_slot5"]

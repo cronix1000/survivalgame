@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bbkfxq5vudvp3"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_duays"]
+
+[resource]
+script = ExtResource("1_duays")
+id = 1003
+equipment_slot = "helmet"
+icon = "crown.png"
+stackable = false
+quantity = 0
+attack = 0
+multiplier = 0.0

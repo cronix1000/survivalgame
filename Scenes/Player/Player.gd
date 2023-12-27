@@ -3,12 +3,14 @@ extends CharacterBody2D
 @export var movement_speed : int = 30.0
 @onready var player : AnimationPlayer = $AnimationPlayer
 @onready var character_sprite : Sprite2D = $CharacterSprite
+@onready var inventory : Inventory = $inventory_holder/inventory
 @onready var move = load_ability("move")
 @onready var basic_attack = load_ability("basic_attack")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player.play("Idle")
-
+	var item = generate_item()
+	PlayerData.inventory = inventory
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	check_input()
@@ -17,6 +19,9 @@ func get_aim_position():
 	return get_global_mouse_position()
 func check_input():
 	if(Input.is_action_pressed("Attack")): basic_attack.basic_attack(self, "basic_sword", 1)	
+
+func generate_item():
+	var item = GameMaster.get_item_by_key("sword")
 
 func movement():
 	var x_move = Input.get_action_strength("Right") - Input.get_action_strength("Left")

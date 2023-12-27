@@ -1,9 +1,18 @@
-extends Node2D
+extends Node
+class_name Inventory
 
 signal items_changed(indexes: Array[int])
-var items : Array[Item] = []
-var cols = 9
+var cols = 4
 var rows = 3
+var slots = cols * rows
+var items = []
+
+func _ready():
+	for i in range(slots):
+		items.append(null)
+	items[0] = preload("res://Scenes/Items/basic_sword.tres")
+	items[1] = preload("res://Scenes/Items/basic_bow.tres")
+	items[3] = preload("res://Scenes/Items/crown.tres")
 
 func set_item(index, item):
 	var previous_item = items[index]

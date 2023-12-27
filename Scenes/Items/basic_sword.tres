@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://mjqdb1xdewoe"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_jxdqr"]
+
+[resource]
+script = ExtResource("1_jxdqr")
+id = 1001
+equipment_slot = "main_hand"
+icon = "sword.png"
+stackable = false
+quantity = 0
+attack = 0
+multiplier = 0.0

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://yjni4dqxjmrs"]
+
+[ext_resource type="Script" path="res://Scenes/InventoryUI/gear_slot.gd" id="1_iag4m"]
+
+[node name="item_icon" type="TextureRect"]
+offset_right = 16.0
+offset_bottom = 16.0
+script = ExtResource("1_iag4m")
+
+[node name="gear_slot" type="TextureRect" parent="."]
+
+[node name="item_quantity" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

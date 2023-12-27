@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://behko5e2bmsul"]
+
+[ext_resource type="Script" path="res://Scenes/InventoryUI/player_ui_gear.gd" id="1_dycys"]
+
+[node name="player_ui_gear" type="GridContainer"]
+script = ExtResource("1_dycys")

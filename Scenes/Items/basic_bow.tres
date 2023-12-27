@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://brgecs2lbm2fu"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_hsly0"]
+
+[resource]
+script = ExtResource("1_hsly0")
+id = 1002
+equipment_slot = "main_hand"
+icon = "basic_bow.png"
+stackable = false
+quantity = 0
+attack = 0
+multiplier = 0.0
