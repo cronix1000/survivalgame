@@ -22,14 +22,12 @@ func display_item(item):
 func _get_drag_data(at_position):
 	var inv_slot = name
 	var inv_slot_number = inv_slot.to_int()
-	print(inventory.items[inv_slot_number])
 	if(inventory.items[inv_slot_number] != null):
 		var data = {}
 		data["item"] = inventory.items[inv_slot_number]
 		data["origin_image"] = item_icon.texture
 		data["origin_node"] = self
 		data["origin_panel"] = "inventory"
-		print(data)
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
 		drag_texture.texture = item_icon.texture

@@ -8,8 +8,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0w2bm"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" groups=["interact"]]
+[node name="Bag" type="CharacterBody2D" node_paths=PackedStringArray("inventory") groups=["interact"]]
+collision_layer = 2
 script = ExtResource("1_0anhv")
+inventory = NodePath("inventory")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-4.76837e-07, 0.5)

@@ -1,11 +1,12 @@
 extends CharacterBody2D
+class_name Bag
 
-@onready var inventory : Inventory = $inventory
+@export var inventory : Inventory
 @onready var inventoryUI = $CanvasLayer/slot_container_generic
 func _ready():
-	var item = preload("res://Scenes/Items/crown.tres")
-	inventory.set_item(0, item)
 	inventoryUI.display_item_slots(inventory.cols, inventory.rows)
+	inventory.connect("items_changed", Callable(self, "if_empty_destroy"))
+	emit_signal("ready")
 
 func interact(s):
 	inventoryUI.visible = true
@@ -13,4 +14,12 @@ func interact(s):
 func cancel_interact():
 	inventoryUI.visible = false
 	
-
+func if_empty_destroy(s):
+	var count = 0
+	for value in inventory.items:
+		if value != null:
+			count += 1
+	if count == 0:
+		queue_free()
+		
+			

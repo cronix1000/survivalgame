@@ -10,7 +10,11 @@ var items = []
 func _ready():
 	for i in range(slots):
 		items.append(null)
-	print("finished")
+	#items[0] = preload("res://Scenes/Items/basic_sword.tres")
+	
+func force_ready():
+	for i in range(slots):
+		items.append(null)
 	#items[0] = preload("res://Scenes/Items/basic_sword.tres")
 
 func set_item(index, item):

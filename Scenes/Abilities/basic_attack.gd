@@ -9,7 +9,6 @@ func basic_attack(s, weapon_name: String, _cooldown: float):
 	if(timer.is_stopped()):
 		timer.start()
 	if(bullets > 0):
-		print(_cooldown)
 		timer.wait_time = _cooldown
 		var f : PackedScene = load("res://Scenes/Abilities/BasicAttacks/" + weapon_name + "_basic_attack.tscn")
 		var f_node : Node = f.instantiate()

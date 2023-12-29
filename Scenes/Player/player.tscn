@@ -1,21 +1,90 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhb6hypgf0j2n"]
+[gd_scene load_steps=12 format=3 uid="uid://bhb6hypgf0j2n"]
 
 [ext_resource type="PackedScene" uid="uid://dfgi3xnigk6cs" path="res://Scenes/Entity/Entity.tscn" id="1_0eni2"]
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="2_e85rf"]
 [ext_resource type="PackedScene" uid="uid://cgur5lf6ggd0q" path="res://Scenes/InventoryUI/inventory.tscn" id="3_76dy1"]
+[ext_resource type="Texture2D" uid="uid://by1607qhc8pj6" path="res://Assets/Oryx/oryx_16bit_fantasy_creatures_trans.png" id="3_e0rjs"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="5_ex2h5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7svy"]
+atlas = ExtResource("3_e0rjs")
+region = Rect2(24, 24, 24, 48)
+
+[sub_resource type="Animation" id="Animation_fgqcc"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_46nj1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ofl1"]
+_data = {
+"RESET": SubResource("Animation_46nj1"),
+"idle": SubResource("Animation_fgqcc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_suhwc"]
+size = Vector2(18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o850b"]
 
 [node name="Player" instance=ExtResource("1_0eni2")]
 collision_mask = 14
 script = ExtResource("2_e85rf")
+hp_total = 20
 
-[node name="Hurt_Box" parent="." index="4"]
+[node name="CharacterSprite" parent="." index="0"]
+position = Vector2(-2.5, -1.5)
+scale = Vector2(0.708333, 0.791667)
+texture = SubResource("AtlasTexture_i7svy")
+vframes = 2
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_6ofl1")
+}
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_suhwc")
+
+[node name="Hurt_Box" parent="." index="3"]
 collision_mask = 4
 
-[node name="Camera2D" type="Camera2D" parent="." index="5"]
+[node name="CollisionShape2D" parent="Hurt_Box" index="0"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_o850b")
 
-[node name="inventory_holder" parent="." index="6" instance=ExtResource("3_76dy1")]
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
 
-[node name="slot_container_generic" parent="inventory_holder/CanvasLayer" index="2"]
+[node name="inventory_holder" parent="." index="5" instance=ExtResource("3_76dy1")]
+
+[node name="slot_container_generic" parent="inventory_holder/CanvasLayer" index="2" node_paths=PackedStringArray("Inventory")]
 anchors_preset = 15
 anchor_left = 0.0
 anchor_top = 0.0
@@ -25,9 +94,16 @@ offset_right = -17.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+Inventory = NodePath("../../../inventory")
 
-[node name="InteractTimer" type="Timer" parent="." index="7"]
+[node name="InteractTimer" type="Timer" parent="." index="6"]
 wait_time = 0.5
+
+[node name="inventory" type="Node" parent="." index="7"]
+script = ExtResource("5_ex2h5")
+
+[connection signal="has_died" from="." to="." method="_on_has_died"]
+[connection signal="timeout" from="InteractTimer" to="." method="_on_interact_timer_timeout"]
 
 [editable path="Hurt_Box"]
 [editable path="inventory_holder"]

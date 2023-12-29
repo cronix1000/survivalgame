@@ -14,11 +14,9 @@ func _ready():
 
 
 func display_item_slots(cols,rows):
-	print("here")
 	#await Inventory.ready
 	columns = cols
 	slots = cols* rows
-	print(Inventory.items[0])
 	for index in range(slots):
 		var item_slot = ItemSlot.instantiate()
 		item_slot.name = "%s" % index

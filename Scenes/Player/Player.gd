@@ -4,12 +4,13 @@ extends Entity
 @onready var basic_attack = load_ability("basic_attack")
 @onready var interact_timer : Timer = $InteractTimer
 @onready var inventoryUI = $inventory_holder/CanvasLayer/slot_container_generic
+@onready var inventory : Inventory = $inventory
 signal has_moved
 var can_interact = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player.play("Idle")
-	var item = generate_item()
+	player.play("idle")
+	var item =generate_item()
 	PlayerData.inventory = inventory
 	inventory.items[0] = preload("res://Scenes/Items/basic_sword.tres")
 	inventory.items[1] = preload("res://Scenes/Items/basic_bow.tres")
@@ -30,7 +31,8 @@ func check_input():
 				var collider = collision.get_collider()
 				if(collider.is_in_group("interact")):
 					collider.interact(self)
-					connect("has_moved", Callable(collider, "cancel_interact"))
+					if(!self.is_connected("has_moved", Callable(collider, "cancel_interact"))):
+						connect("has_moved", Callable(collider, "cancel_interact"))
 					can_interact = false
 					interact_timer.start()
 			
@@ -58,3 +60,7 @@ func can_unlock(health : int, stamina : int, strength : int) -> bool:
 
 func _on_interact_timer_timeout():
 	can_interact = true
+
+
+func _on_has_died():
+	print("had died")

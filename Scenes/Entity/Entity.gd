@@ -4,11 +4,11 @@ class_name Entity
 
 
 @export var movement_speed : int = 30.0
-@export var hp_total : int = 100 : set = set_hp_total
+@export var hp_total : int = 0
 var hp : int = hp_total : set = set_hp
 @export var defence : int = 0
 
-@onready var inventory : Inventory = $inventory
+
 @onready var player : AnimationPlayer = $AnimationPlayer
 @onready var character_sprite : Sprite2D = $CharacterSprite
 @onready var hurt_box = $Hurt_Box

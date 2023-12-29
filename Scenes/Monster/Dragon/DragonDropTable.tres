@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DropTable" load_steps=4 format=3 uid="uid://defityx2tnrjn"]
+
+[ext_resource type="Script" path="res://Scripts/DropTable.gd" id="1_0h7tj"]
+[ext_resource type="Resource" uid="uid://bbkfxq5vudvp3" path="res://Scenes/Items/crown.tres" id="1_02ado"]
+[ext_resource type="Resource" uid="uid://mjqdb1xdewoe" path="res://Scenes/Items/basic_sword.tres" id="2_ihe2y"]
+
+[resource]
+script = ExtResource("1_0h7tj")
+drop_table = {
+0.23: ExtResource("2_ihe2y"),
+0.76: ExtResource("2_ihe2y"),
+0.98: ExtResource("1_02ado")
+}

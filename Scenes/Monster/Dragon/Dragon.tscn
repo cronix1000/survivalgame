@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=3 uid="uid://sxehqygadn5c"]
+
+[ext_resource type="PackedScene" uid="uid://doedfs4y250np" path="res://Scenes/Monster/Enemy_Base.tscn" id="1_ar0wg"]
+[ext_resource type="Script" path="res://Scenes/Monster/Dragon/Dragon.gd" id="2_14efr"]
+[ext_resource type="Resource" uid="uid://defityx2tnrjn" path="res://Scenes/Monster/Dragon/DragonDropTable.tres" id="3_hv7u7"]
+[ext_resource type="Texture2D" uid="uid://by1607qhc8pj6" path="res://Assets/Oryx/oryx_16bit_fantasy_creatures_trans.png" id="4_cgf60"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="4_cw6rc"]
+[ext_resource type="PackedScene" uid="uid://dhl602tx4ri7w" path="res://Scenes/hurthitbox/Hit_Box.tscn" id="5_y43j7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2y67"]
+atlas = ExtResource("4_cgf60")
+region = Rect2(24, 456, 24, 48)
+
+[sub_resource type="Animation" id="Animation_xy565"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_n4o5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8lmo"]
+_data = {
+"RESET": SubResource("Animation_n4o5k"),
+"idle": SubResource("Animation_xy565")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5xfh"]
+size = Vector2(18, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe52r"]
+size = Vector2(24, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5dko"]
+size = Vector2(24, 24)
+
+[node name="Dragon" instance=ExtResource("1_ar0wg")]
+script = ExtResource("2_14efr")
+drop_table = ExtResource("3_hv7u7")
+hp_total = 10
+
+[node name="inventory" type="Node" parent="." index="0"]
+script = ExtResource("4_cw6rc")
+
+[node name="CharacterSprite" parent="." index="1"]
+texture = SubResource("AtlasTexture_x2y67")
+vframes = 2
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_b8lmo")
+}
+
+[node name="CollisionShape2D" parent="." index="3"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_i5xfh")
+
+[node name="CollisionShape2D" parent="Hurt_Box" index="0"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_oe52r")
+
+[node name="Hit_Box" parent="." index="5" instance=ExtResource("5_y43j7")]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="Hit_Box" index="0"]
+shape = SubResource("RectangleShape2D_t5dko")
+
+[editable path="Hurt_Box"]
+[editable path="Hit_Box"]

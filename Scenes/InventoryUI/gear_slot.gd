@@ -24,7 +24,6 @@ func _get_drag_data(at_position):
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
 		drag_texture.texture = texture
-		print(texture)
 		drag_texture.set_size(Vector2(16,16))
 		set_drag_preview(drag_texture)
 		return data
@@ -70,5 +69,4 @@ func _drop_data(at_position, data):
 		data["origin_node"].display_item(data["target_item"])
 	
 	PlayerData.equipment_data[target_equipment_slot] = data["item"]
-	print(PlayerData.equipment_data[target_equipment_slot].icon)
 	display_item(data["item"])

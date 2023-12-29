@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccg18gwwyqqlq"]
+[gd_scene load_steps=7 format=3 uid="uid://ccg18gwwyqqlq"]
 
 [ext_resource type="Script" path="res://Scenes/Abilities/BasicAttacks/basic_sword_basic_attack.gd" id="1_cny2g"]
 [ext_resource type="Texture2D" uid="uid://d1ykl250u0hku" path="res://Assets/Oryx/oryx_16bit_fantasy_fx_trans.png" id="2_6njq2"]
+[ext_resource type="PackedScene" uid="uid://dhl602tx4ri7w" path="res://Scenes/hurthitbox/Hit_Box.tscn" id="3_akjjp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ky0x4"]
 atlas = ExtResource("2_6njq2")
@@ -9,6 +10,9 @@ region = Rect2(24, 192, 24, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1h3pj"]
 radius = 7.07107
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4tinw"]
+radius = 7.0
 
 [node name="basic_sword_basic_attack" type="CharacterBody2D"]
 script = ExtResource("1_cny2g")
@@ -18,3 +22,13 @@ texture = SubResource("AtlasTexture_ky0x4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1h3pj")
+
+[node name="Hit_Box" parent="." instance=ExtResource("3_akjjp")]
+collision_layer = 8
+collision_mask = 5
+damage = 11
+
+[node name="CollisionShape2D" parent="Hit_Box" index="0"]
+shape = SubResource("CircleShape2D_4tinw")
+
+[editable path="Hit_Box"]
