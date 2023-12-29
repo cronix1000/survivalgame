@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfgi3xnigk6cs"]
+
+[ext_resource type="Script" path="res://Scenes/Entity/Entity.gd" id="1_gj7c8"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="2_v3hpl"]
+[ext_resource type="PackedScene" uid="uid://cfxlh8jtfdifr" path="res://Scenes/hurthitbox/Hurt_Box.tscn" id="3_6bdet"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_gj7c8")
+
+[node name="inventory" type="Node" parent="."]
+script = ExtResource("2_v3hpl")
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Hurt_Box" parent="." instance=ExtResource("3_6bdet")]
+
+[editable path="Hurt_Box"]

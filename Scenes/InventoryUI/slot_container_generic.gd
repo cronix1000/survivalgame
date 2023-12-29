@@ -7,14 +7,15 @@ class_name slot_container_generic
 var slots
 
 func _ready():
-	display_item_slots(Inventory.cols, Inventory.rows)
 	await "process_frame"
+	#display_item_slots(Inventory.cols, Inventory.rows)
 	#position = (get_viewport_rect().size - get_rect().size) /2
 	hide()
 
 
 func display_item_slots(cols,rows):
-	await Inventory.ready
+	print("here")
+	#await Inventory.ready
 	columns = cols
 	slots = cols* rows
 	print(Inventory.items[0])

@@ -1,15 +1,15 @@
 extends TextureRect
 
 @export var gear_slot : String
-@onready var item_icon = $item_icon
+#@onready var item_icon = $item_icon
 @onready var item_quantity = $item_quantity
 
 func display_item(item):
 	if item:
-		item_icon.texture = load("res://assets/items/%s" % item.icon)
+		texture = load("res://assets/items/%s" % item.icon)
 		item_quantity.text = str(item.quantity) if item.stackable else ""
 	else:
-		item_icon.texture = null
+		texture = null
 		item_quantity.text = ""
 			
 			
@@ -18,13 +18,13 @@ func _get_drag_data(at_position):
 	if(PlayerData.equipment_data[equipment_slot] != null):
 		var data = {}
 		data["item"] = PlayerData.equipment_data[equipment_slot]
-		data["origin_image"] = item_icon.texture
+		data["origin_image"] = texture
 		data["origin_node"] = self
 		data["origin_panel"] = "gear"
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
-		drag_texture.texture = item_icon.texture
-		print(item_icon.texture)
+		drag_texture.texture = texture
+		print(texture)
 		drag_texture.set_size(Vector2(16,16))
 		set_drag_preview(drag_texture)
 		return data
@@ -38,7 +38,7 @@ func _can_drop_data(at_position, data):
 			data["target_item"] = null 
 		# target has an item we need to swap them
 		else: 
-			data["target_texture"] = item_icon.texture
+			data["target_texture"] = texture
 			data["target_item"] = PlayerData.equipment_data[target_equipment_slot]
 		return true
 	else:
@@ -57,16 +57,18 @@ func _drop_data(at_position, data):
 	if data["origin_panel"] == "inventory":
 		# if we need to swap the item if not it will set as null
 		PlayerData.inventory.set_item(origin_slot, data["target_item"])
+		PlayerData.equipment_data[target_equipment_slot] =  data["target_item"]
 	elif(data["origin_panel"] == "gear"):
 		PlayerData.equipment_data[origin_slot] =  data["item"]
 	
 	# update the texture of the origin
 	if(data["origin_panel"] == "gear" and data["target_item"] == null):
 		var default_texture = load("res://assets/UI_Elements/" + origin_slot + "_default_icon.png")
-		data["origin_node"].item_icon.texture = default_texture
+		data["origin_node"].texture = default_texture
 		#data["origin_node"].display_item(data["target_item"])
 	else:
 		data["origin_node"].display_item(data["target_item"])
 	
 	PlayerData.equipment_data[target_equipment_slot] = data["item"]
+	print(PlayerData.equipment_data[target_equipment_slot].icon)
 	display_item(data["item"])

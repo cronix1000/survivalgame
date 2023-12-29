@@ -8,6 +8,7 @@ offset_bottom = 16.0
 script = ExtResource("1_iag4m")
 
 [node name="gear_slot" type="TextureRect" parent="."]
+layout_mode = 0
 
 [node name="item_quantity" type="Label" parent="."]
 layout_mode = 0

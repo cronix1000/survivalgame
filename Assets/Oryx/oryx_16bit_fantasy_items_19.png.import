@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6may02m4ihlu"
-path="res://.godot/imported/Health_01.png-79e195174f1435246654940e552b8dcc.ctex"
+uid="uid://qplsuwx0nfix"
+path="res://.godot/imported/oryx_16bit_fantasy_items_19.png-e76f455bbb7ae1bf0609813219b3b69c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI_Elements/Health_01.png"
-dest_files=["res://.godot/imported/Health_01.png-79e195174f1435246654940e552b8dcc.ctex"]
+source_file="res://Assets/Oryx/oryx_16bit_fantasy_items_19.png"
+dest_files=["res://.godot/imported/oryx_16bit_fantasy_items_19.png-e76f455bbb7ae1bf0609813219b3b69c.ctex"]
 
 [params]
 

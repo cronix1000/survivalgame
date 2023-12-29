@@ -1,5 +1,5 @@
 extends ColorRect
-class_name item_slot
+class_name non_player_item_slot
 
 
 @onready var item_icon = $item_icon
@@ -28,7 +28,7 @@ func _get_drag_data(at_position):
 		data["item"] = inventory.items[inv_slot_number]
 		data["origin_image"] = item_icon.texture
 		data["origin_node"] = self
-		data["origin_panel"] = "inventory"
+		data["origin_panel"] = "loot"
 		print(data)
 		var drag_texture = TextureRect.new()
 		drag_texture.expand = true
@@ -41,28 +41,7 @@ func _get_drag_data(at_position):
 		return data
 	
 func _can_drop_data(at_position, data):
-	var inv_slot = name
-	var inv_slot_number = inv_slot.to_int()
-	data["target_slot"] = inv_slot_number
-	# Item slot is empty
-	if(inventory.items[inv_slot_number]) == null:
-		data["target_texture"] = null
-		data["target_item"] = null
-		return true 
-	#swap items
-	else:
-		data["target_item"] = inventory.items[inv_slot_number]
-		data["target_texture"] = item_icon.texture
-		if(data["origin_panel"] == "gear"):
-			var target_inventory_slot = inventory.items[inv_slot_number].equipment_slot
-			# if the item comes from the equipment and we try to replace it with an inventory item only 
-			# swap if they are the same type i.e swapping sword for dagger = true or swapping sword for helmet = false
-			if(target_inventory_slot == data["item"].equipment_slot):
-				return true
-			else:
-				return false
-		else: # data comes from Inventory
-			return true
+	return false
 
 func _drop_data(at_position, data):
 	var target_inventory_slot = name.to_int()
@@ -71,19 +50,15 @@ func _drop_data(at_position, data):
 		origin_slot = data["origin_node"].get_name().to_int()
 	elif(data["origin_panel"] == "gear"):
 		origin_slot = data["origin_node"].gear_slot
-	elif(data["origin_panel"] == "loot"):
-		origin_slot = data["origin_node"].get_name().to_int()
 		
 	
 	# if the item originates from the inventory
 	if data["origin_panel"] == "inventory":
 		# if we need to swap the item if not it will set as null
-		inventory.set_item(origin_slot, data["target_item"])
+		data["origin_node"].inventory.set_item(origin_slot, data["target_item"])
 	elif(data["origin_panel"] == "gear"):
 		PlayerData.equipment_data[origin_slot] =  data["target_item"]
 		inventory.set_item(target_inventory_slot, data["target_item"])
-	elif(data["origin_panel"] == "loot"):
-		data["origin_node"].inventory.set_item(origin_slot, data["target_item"])
 		
 	
 	# update the texture of the origin

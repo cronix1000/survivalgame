@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dc5i7py3nt56p"]
+
+[ext_resource type="Script" path="res://Scenes/Bag/bag.gd" id="1_0anhv"]
+[ext_resource type="Texture2D" uid="uid://qplsuwx0nfix" path="res://Assets/Oryx/oryx_16bit_fantasy_items_19.png" id="1_ajpqu"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="3_5fqjk"]
+[ext_resource type="PackedScene" uid="uid://d16nomqgr05n5" path="res://Scenes/InventoryUI/slot_container_generic.tscn" id="4_vl7fr"]
+[ext_resource type="PackedScene" uid="uid://4whdpnedkki7" path="res://Scenes/InventoryUI/item_slot.tscn" id="5_pcnps"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0w2bm"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["interact"]]
+script = ExtResource("1_0anhv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, 0.5)
+scale = Vector2(1.25, 1.3125)
+texture = ExtResource("1_ajpqu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0w2bm")
+
+[node name="inventory" type="Node" parent="."]
+script = ExtResource("3_5fqjk")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Node2D"]
+
+[node name="slot_container_generic" parent="Node2D/CanvasLayer" node_paths=PackedStringArray("Inventory") instance=ExtResource("4_vl7fr")]
+ItemSlot = ExtResource("5_pcnps")
+Inventory = NodePath("../../../inventory")

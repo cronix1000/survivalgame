@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://chm0hrhwp2dn8"]
+
+[ext_resource type="Script" path="res://Scenes/Monster/monster.gd" id="1_p5vld"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="2_7yegt"]
+
+[node name="Monster" type="CharacterBody2D"]
+script = ExtResource("1_p5vld")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("2_7yegt")

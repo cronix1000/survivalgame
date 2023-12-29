@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://deh0knpjefq3p"]
+
+[ext_resource type="Texture2D" uid="uid://dduemxk7qafy0" path="res://Assets/Oryx/oryx_16bit_fantasy_world_943.png" id="1_mysbq"]
+[ext_resource type="PackedScene" uid="uid://bhb6hypgf0j2n" path="res://Scenes/Player/player.tscn" id="2_fww6w"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="3_u1yhn"]
+[ext_resource type="PackedScene" uid="uid://dc5i7py3nt56p" path="res://Scenes/Bag/bag.tscn" id="4_y5mi6"]
+
+[node name="main" type="Node2D" groups=["main"]]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-67, 38)
+texture = ExtResource("1_mysbq")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 4000)
+
+[node name="Player" parent="." instance=ExtResource("2_fww6w")]
+position = Vector2(-121, 141)
+
+[node name="monster" type="Node2D" parent="."]
+
+[node name="inventory" type="Node" parent="monster"]
+script = ExtResource("3_u1yhn")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_y5mi6")]
+position = Vector2(-207, 136)

@@ -10,9 +10,8 @@ var items = []
 func _ready():
 	for i in range(slots):
 		items.append(null)
-	items[0] = preload("res://Scenes/Items/basic_sword.tres")
-	items[1] = preload("res://Scenes/Items/basic_bow.tres")
-	items[3] = preload("res://Scenes/Items/crown.tres")
+	print("finished")
+	#items[0] = preload("res://Scenes/Items/basic_sword.tres")
 
 func set_item(index, item):
 	var previous_item = items[index]

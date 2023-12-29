@@ -1,16 +1,20 @@
-extends CharacterBody2D
+extends Entity
 
-@export var movement_speed : int = 30.0
-@onready var player : AnimationPlayer = $AnimationPlayer
-@onready var character_sprite : Sprite2D = $CharacterSprite
-@onready var inventory : Inventory = $inventory_holder/inventory
 @onready var move = load_ability("move")
 @onready var basic_attack = load_ability("basic_attack")
+@onready var interact_timer : Timer = $InteractTimer
+@onready var inventoryUI = $inventory_holder/CanvasLayer/slot_container_generic
+signal has_moved
+var can_interact = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player.play("Idle")
 	var item = generate_item()
 	PlayerData.inventory = inventory
+	inventory.items[0] = preload("res://Scenes/Items/basic_sword.tres")
+	inventory.items[1] = preload("res://Scenes/Items/basic_bow.tres")
+	inventory.items[3] = preload("res://Scenes/Items/crown.tres")
+	inventoryUI.display_item_slots(inventory.cols, inventory.rows)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	check_input()
@@ -18,7 +22,18 @@ func _physics_process(delta):
 func get_aim_position():
 	return get_global_mouse_position()
 func check_input():
-	if(Input.is_action_pressed("Attack")): basic_attack.basic_attack(self, "basic_sword", 1)	
+	if(Input.is_action_pressed("Attack")): basic_attack.basic_attack(self, "basic_sword", 1)
+	if(can_interact):
+		if(Input.is_action_pressed("Interact")):
+			var collision = get_last_slide_collision()
+			if(collision && collision.get_collider()):
+				var collider = collision.get_collider()
+				if(collider.is_in_group("interact")):
+					collider.interact(self)
+					connect("has_moved", Callable(collider, "cancel_interact"))
+					can_interact = false
+					interact_timer.start()
+			
 
 func generate_item():
 	var item = GameMaster.get_item_by_key("sword")
@@ -32,12 +47,14 @@ func movement():
 		character_sprite.flip_h = true
 	if(x_move == -1):
 		character_sprite.flip_h = false
+	
+	if(velocity != Vector2(0,0)):
+		emit_signal("has_moved")
 
-func load_ability(ability_name : String):
-	var scene = load("res://Scenes/Abilities/" + ability_name + ".tscn")
-	var scene_node = scene.instantiate()
-	add_child(scene_node)
-	return scene_node;
 	
 func can_unlock(health : int, stamina : int, strength : int) -> bool:
 	return true
+
+
+func _on_interact_timer_timeout():
+	can_interact = true

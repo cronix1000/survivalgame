@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://doedfs4y250np"]
+
+[ext_resource type="PackedScene" uid="uid://dfgi3xnigk6cs" path="res://Scenes/Entity/Entity.tscn" id="1_50stk"]
+
+[node name="Enemy_Base" instance=ExtResource("1_50stk")]
+collision_layer = 4
+collision_mask = 7
+hp_total = 100
+
+[node name="Hurt_Box" parent="." index="4"]
+collision_layer = 4
+collision_mask = 8
+
+[connection signal="area_entered" from="Hurt_Box" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="Hurt_Box"]
